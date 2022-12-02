@@ -10,6 +10,8 @@ Only change this file if you would like to change the trained embedding layer.
 
 It downloads the the embedding layer and export environment variables for later when training the model.
 
+If you would like to change embedding dim, please change it from the docker file ENV embed_dim=*** , availabe dim for this trained embedding are: 100, 300, and 500.
+
 ## Navigatie Code
 
 ### app:
