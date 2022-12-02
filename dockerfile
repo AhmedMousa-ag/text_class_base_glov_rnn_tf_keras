@@ -8,13 +8,14 @@ RUN apt-get -y update && \
          ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-RUN set -xe \
-    && apt-get -y install python3-pip
-RUN pip install --upgrade pip
 
 
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt 
+
+
+ENV embed_dim=300 
+ENV embed_file_name=glove.6B."$embed_dim"d.txt 
 
 COPY ./download_embedding.sh .
 RUN ./download_embedding.sh 
