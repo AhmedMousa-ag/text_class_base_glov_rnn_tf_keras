@@ -54,7 +54,7 @@ class RNN_pretrained_embed():
         model.add(embed_layer)
 
         for i in range(num_layers):
-            model.add(Bidirectional(GRU(neurons_num,  activation='relu', return_sequences=True),
+            model.add(Bidirectional(GRU(neurons_num, activation='relu',return_sequences=True),
                                     name=f"Bidirectional_layer_{i}"))
 
         model.add(Flatten())
