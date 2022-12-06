@@ -8,8 +8,8 @@ def check_dir(dir_path):
         os.makedirs(dir_path)
 
 
-prefix = os.path.join(os.pardir, 'ml_vol')
-#prefix = os.path.join('opt','ml_vol')
+#prefix = os.path.join(os.pardir, 'ml_vol')
+prefix = os.path.join('opt','ml_vol')
 
 
 RAND_SEED = 42
@@ -46,17 +46,20 @@ TEST_DATA_PATH = glob.glob(os.path.join(
     DATA_PATH, 'testing', "textClassificationBaseMainInput", "*.csv"))[0]
 
 
-MODEL_NAME = "tf_bidirectional_text_class"
+MODEL_NAME = "tf_trained_glov_embed_bidirectional_model"
 
 MODEL_SAVE_PATH = os.path.join(prefix, 'model', 'artifacts')
 check_dir(MODEL_SAVE_PATH)
 
 
 
-EMBED_DIM = os.getenv("embed_dim")
+EMBED_DIM = int(os.getenv("embed_dim"))
 embed_file_name = os.getenv("embed_file_name")
-TRAINED_EMBEDD_PATH = os.path.join(MODEL_SAVE_PATH,"trained_embed")
-check_dir(TRAINED_EMBEDD_PATH)
+
+print(f"embed dim: {EMBED_DIM}")
+print(f"file embed name: {embed_file_name}")
+check_dir(os.path.join(MODEL_SAVE_PATH,"trained_embed"))
+TRAINED_EMBEDD_PATH = os.path.join(MODEL_SAVE_PATH,"trained_embed",embed_file_name)
 
 # os.path.join("Utils","preprocess","artifacts")
 PREPROCESS_ARTIFACT_PATH = MODEL_SAVE_PATH
