@@ -4,7 +4,9 @@
 
 wget -P /tmp http://nlp.stanford.edu/data/glove.6B.zip
 
-unzip -q /tmp/glove.6B.zip
+
+unzip /tmp/glove.6B.zip -d /tmp/
+
 
 mkdir -p /opt/app/model/artifacts/trained_embed/
 

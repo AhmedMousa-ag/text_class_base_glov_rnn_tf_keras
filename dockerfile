@@ -8,17 +8,21 @@ RUN apt-get -y update && \
          ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
+ARG embed_dim=50 
+
+ENV embed_dim=${embed_dim} 
+ENV embed_file_name=glove.6B."$embed_dim"d.txt 
+
+COPY ./download_embedding.sh .
+RUN ./download_embedding.sh 
 
 
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt 
 
 
-ENV embed_dim=300 
-ENV embed_file_name=glove.6B."$embed_dim"d.txt 
 
-COPY ./download_embedding.sh .
-RUN ./download_embedding.sh 
+
 
 COPY app ./opt/app
 
