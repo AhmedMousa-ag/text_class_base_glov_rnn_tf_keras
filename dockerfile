@@ -22,11 +22,13 @@ RUN pip install -r requirements.txt
 
 
 
-
-
 COPY app ./opt/app
 
 WORKDIR /opt/app
+
+
+COPY ./copy_embedding_file.sh .
+RUN ./copy_embedding_file.sh 
 
 
 ENV PYTHONUNBUFFERED=TRUE
