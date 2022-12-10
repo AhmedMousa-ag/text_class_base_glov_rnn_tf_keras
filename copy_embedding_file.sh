@@ -1,7 +1,7 @@
-mkdir -p /opt/app/model/artifacts/trained_embed/
+mkdir -p /opt/app/Utils/pretrained_embed
 
 
-cp /tmp/"$embed_file_name" /opt/app/model/artifacts/trained_embed/
+mv /tmp/"$embed_file_name" /opt/app/Utils/pretrained_embed
 
 
 echo 'export embed_dim=$embed_dim' >> /root/.bashrc  #To keep env variable on the system after restarting
