@@ -2,9 +2,9 @@
 
 ## Navigatie Code
 
-This code uses a pretrained glov embedding with a biderictional layers with tensorflow.
+This code uses a pretrained glov embedding with a biderictional layers with tensorflow. Model also contains LIME Text Explainer which returns local explanations for predictions.
 
-### download_embedding.sh
+### Dockerfile
 
 Only change this file if you would like to change the trained embedding layer.
 
@@ -26,13 +26,15 @@ inference_app.py: is a file that declare infer/ping and predictions to requested
 
 Utils consist of:
 
-1- preprocess folder: has the preprocess classes to process data according to schema.
+1- model_explain: Where text explainability using Lime happens
 
-2- model_builder.py: where the Machine Learning model defined, built, and loaded.
+2- preprocess folder: has the preprocess classes to process data according to schema.
 
-3- predictions_handler.py: called when needed a prediction for inference or testing/predic.
+3- model_builder.py: where the Machine Learning model defined, built, and loaded.
 
-4- utils.py: general functions to help such as load json files.
+4- predictions_handler.py: called when needed a prediction for inference or testing/predic.
+
+5- utils.py: general functions to help such as load json files.
 
 #### train
 
