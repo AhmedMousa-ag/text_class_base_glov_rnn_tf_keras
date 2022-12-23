@@ -13,22 +13,25 @@ ARG embed_dim=50
 ENV embed_dim=${embed_dim} 
 ENV embed_file_name=glove.6B."$embed_dim"d.txt 
 
-COPY ./download_embedding.sh .
-RUN ./download_embedding.sh 
+# For referencess please visit https://nlp.stanford.edu/projects/glove/ 
+# There are more trained embeddings that were trained on more corpus, check prev site for more.
+
+RUN wget -P /tmp http://nlp.stanford.edu/data/glove.6B.zip
+RUN unzip /tmp/glove.6B.zip -d /tmp/
 
 
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt 
 
-
+RUN mkdir -p /opt/app/Utils/pretrained_embed
+RUN mv /tmp/"$embed_file_name" /opt/app/Utils/pretrained_embed
+RUN echo 'export embed_dim=$embed_dim' >> /root/.bashrc  #To keep env variable on the system after restarting
+RUN echo 'export embed_file_name=$embed_file_name' >> /root/.bashrc #To keep env variable on the system after restarting
 
 COPY app ./opt/app
 
 WORKDIR /opt/app
 
-
-COPY ./copy_embedding_file.sh .
-RUN ./copy_embedding_file.sh 
 
 
 ENV PYTHONUNBUFFERED=TRUE
@@ -41,3 +44,8 @@ RUN chmod +x train &&\
     chmod +x predict &&\
     chmod +x serve 
 
+RUN chown -R 1000:1000 /opt/app/  && \
+    chown -R 1000:1000 /var/log/nginx/  && \
+    chown -R 1000:1000 /var/lib/nginx/
+
+USER 1000
