@@ -50,7 +50,7 @@ TEST_DATA_PATH = glob.glob(
 )[0]
 
 
-MODEL_NAME = "tf_trained_word2vec_embed_bidirectional_model"
+MODEL_NAME = "tf_trained_glove_embed_bidirectional_model"
 
 MODEL_SAVE_PATH = os.path.join(prefix, "model", "artifacts")
 check_dir(MODEL_SAVE_PATH)
